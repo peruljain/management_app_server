@@ -26,7 +26,7 @@ SECRET_KEY = 'd1u^%!#c$@drs#^g7k5o75*xd#%98_zs*r61fxxofyqb4l3i%+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['perulapp.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition

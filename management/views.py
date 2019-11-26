@@ -35,21 +35,16 @@ class CheckIn(APIView):
         h_phone=request.POST.get('host_phone')
         now=datetime.datetime.now().time()
         time = now.strftime("%H:%M:%S")
-        if User.objects.filter(username=v_email).count!=0:
-            try:
-                user=User.objects.get(username=v_email)
-                data=Database.objects.get(user=user)
-                data.visitor_name=v_name
-                data.visitor_phone=v_phone
-                data.host_name=h_name
-                data.host_phone=h_phone
-                data.host_email=h_email
-                data.time=time
-                data.save()
-            except:
-                pass
-
-            
+        if User.objects.filter(username=v_email).exists():
+            user=User.objects.get(username=v_email)
+            data=Database.objects.get(user=user)
+            data.visitor_name=v_name
+            data.visitor_phone=v_phone
+            data.host_name=h_name
+            data.host_phone=h_phone
+            data.host_email=h_email
+            data.time=time
+            data.save()
             
         else :
             user=User.objects.create_user(username=v_email,password=v_email,email=v_email)
