@@ -9,7 +9,7 @@ class Database(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     visitor_name=models.CharField(max_length=100,default='')
     visitor_email=models.CharField(max_length=100,default='')
-    visitor_phone=models.IntegerField(default=0)
+    visitor_phone=models.CharField(max_length=100,default='')
     host_name=models.CharField(max_length=100,default='')
     host_email=models.CharField(max_length=100,default='')
     host_phone=models.CharField(max_length=100,default='')
