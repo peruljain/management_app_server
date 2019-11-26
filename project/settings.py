@@ -26,7 +26,7 @@ SECRET_KEY = 'd1u^%!#c$@drs#^g7k5o75*xd#%98_zs*r61fxxofyqb4l3i%+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['perulmanagementapp.herokuapp.com','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['perulapp.herokuapp.com']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -121,8 +122,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
+STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Extra lookup directories for collectstatic to find static files
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'perul1999@gmail.com'
 SERVER_EMAIL = 'perul1999@gmail.com'
@@ -131,3 +143,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'perul1999@gmail.com'
 EMAIL_HOST_PASSWORD = 'kajalbharti'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
+
+django_heroku.settings(locals())
