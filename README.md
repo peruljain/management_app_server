@@ -5,7 +5,7 @@ An android application connect with sqlite database througt restful api. In our 
 application with user information and save it to database.
 
 Django REST framework is used for making restful api.
-For sending messages and email I used smtp server.
+For sending messages and email  I used **smtp**(https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) server.
 
 ###end points
 1) https://127.0.0.1.8000/checkin/
